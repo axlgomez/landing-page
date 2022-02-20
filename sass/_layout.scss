@@ -1,0 +1,616 @@
+@use "base" as *;
+@use "abstract" as *;
+
+body
+{
+    font-family: $font-secondary;
+    font-size: $size-primary;
+    background-color: $white;
+
+}
+
+.header
+{
+    background-image: url(/images/mobile/image-header.jpg);
+    background-color: rgb(166, 231, 229);
+    @include background;
+    height: 80vh;
+    text-align: center;
+    position: relative;
+
+    @include responsive(tablet)
+    {
+        background-image: url(/images/desktop/image-header.jpg);
+    }
+
+    &__images
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5em;
+    }
+
+    &__hamburger
+    {
+        cursor: pointer;
+
+        @include responsive (tablet)
+        {
+            display: none;
+        }
+    }
+
+    &__desktop
+    {
+        display: none;
+
+        @include responsive(tablet)
+        {
+            display: block;
+            overflow: hidden;
+        }
+    }
+
+    &__item
+    {
+        @include responsive(tablet)
+        {
+            display: inline-block;
+            text-decoration: none;
+            color: $white;
+            margin: 0 .7em;
+            font-family: $font-primary;
+            font-size: 16px;
+            padding: .8em 1.3em;
+            border-radius: 30px;
+
+            &:hover
+            {
+                background-color: rgba($color: $white, $alpha: .3);
+                color: $white;
+            }
+        }
+
+        &-active
+        {
+            background: $white;
+            color: black;
+            text-transform: uppercase;
+            font-family: $font-secondary;
+            font-size: 14px;
+        }
+    }
+
+    &__mobile
+    {
+        background-color: $white;
+        width: 85%;
+        height: 60%;
+        position: absolute;
+        left: 8%;
+        margin-top: 1em;
+        opacity: 0;
+        transition: .3s ease-in;
+        z-index: -1;
+
+        &.active
+        {
+            opacity: 1;
+            z-index: 1;
+
+            @include responsive(tablet)
+            {
+                opacity: 0;
+                z-index: -1;
+            }
+        }
+
+        &::before
+        {
+            content: "";
+            border-top: 12px solid transparent;
+            border-left: 12px solid transparent;
+            border-right: 12px solid $white;
+            border-bottom: 12px solid $white;
+            position: absolute;
+            top: -24px; right: 0;
+
+        }
+    }
+
+    &__item-hamburger
+    {
+        display: block;
+        margin: 1.2em 0;
+        text-decoration: none;
+        font-family: $font-primary;
+        font-size: 16px;
+        padding: .8em 1.3em;
+        color: $dark-grayish-blue;
+    }
+
+    &__item-hamburger-active
+    {
+        width: 6em;
+        margin: auto;
+        background: $yellow;
+        color: black;
+        text-transform: uppercase;
+        font-family: $font-secondary;
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
+    &__title-primary
+    {
+        color: $white;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        font-weight: map-get($weights, blackk);
+        margin-top: 1em;
+        line-height: 1.2em;
+
+        @include responsive(tablet)
+        {
+            display: none;
+        }
+    }
+
+    &__title-secondary
+    {
+        display: none;
+
+        @include responsive(tablet)
+        {
+            display: block;
+            color: $white;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: map-get($weights, blackk);
+            margin-top: 1.2em;
+            line-height: 1.2em;
+        }
+    }
+
+    &__arrow-down
+    {
+        margin-top: 1em;
+    }
+}
+
+.brand
+{
+    @include flex;
+
+    @include responsive(portatil)
+    {
+        flex-direction: row-reverse;
+    }
+
+    &__content
+    {
+        order: 2;
+        text-align: center;
+        padding: 1.5em;
+        font-family: $font-secondary;
+
+        @include responsive(portatil)
+        {
+            text-align: start;
+            padding: 0 5em;
+        }
+    }
+
+    &__img
+    {
+        width: 100%;
+
+        @include responsive(tablet)
+        {
+            display: none;
+        }
+    }
+
+    &__img-desktop
+    {
+        display: none;
+
+        @include responsive(tablet)
+        {
+            display: block;
+            width: 100%;
+        }
+
+        @include responsive(portatil)
+        {
+            width: 50%;
+        }
+
+    }
+
+    &__title
+    {
+        color: $very-dark-desaturated-blue;
+    }
+
+    &__text
+    {
+        color: $dark-grayish-blue;
+        font-family: $font-primary;
+        line-height: 1.5;
+
+        @include responsive(portatil)
+        {
+            font-size: 14px;
+        }
+    }
+
+    &__link
+    {
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        color: $very-dark-desaturated-blue;
+        font-size: 16px;
+        margin: 1em 0 1.5em 0;
+
+        &::after
+        {
+            position: absolute;
+            content: "";
+            height: 10px;
+            width: 110%;
+            background: rgba($color: $yellow, $alpha: .3);
+            margin: 0 auto;
+            left: -5px; right: 0;
+            bottom: -3px;
+            border-radius: 10px;
+            transition: .7s;
+            z-index: -1;
+        }
+
+        &:hover::after
+        {
+            background: $yellow;
+        }
+    }
+}
+
+.audience
+{
+    @include flex;
+
+    @include responsive(portatil)
+    {
+        flex-direction: row;
+    }
+
+    &__content
+    {
+        order: 2;
+        text-align: center;
+        padding: 1.5em;
+        font-family: $font-secondary;
+
+        @include responsive(portatil)
+        {
+            text-align: start;
+            padding: 0 4em;
+        }
+    }
+
+    &__img
+    {
+        width: 100%;
+
+        @include responsive(tablet)
+        {
+            display: none;
+        }
+    }
+
+    &__title
+    {
+        color: $very-dark-desaturated-blue;
+    }
+
+    &__text
+    {
+        color: $dark-grayish-blue;
+        font-family: $font-primary;
+        line-height: 1.5;
+
+        @include responsive(portatil)
+        {
+            font-size: 14px;
+        }
+    }
+
+    &__link
+    {
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        color: $very-dark-desaturated-blue;
+        font-size: 16px;
+        margin: 1em 0;
+
+        &::after
+        {
+            position: absolute;
+            content: "";
+            height: 10px;
+            width: 110%;
+            background: rgba($color: $soft-red, $alpha: .3);
+            margin: 0 auto;
+            left: -5px; right: 0; bottom: -3px;
+            border-radius: 10px;
+            transition: .7s;
+            z-index: -1;
+        }
+
+        &:hover::after
+        {
+            background: $soft-red;
+        }
+    }
+}
+
+.backgrounds
+{
+    @include responsive(portatil)
+    {
+        display: flex;
+    }
+}
+
+.design
+{
+    background-image: url(/images/mobile/image-graphic-design.jpg);
+    @include background;
+    height: 90vh;
+    text-align: center;
+
+    @include responsive(tablet)
+    {
+        background-image: url(/images/desktop/image-graphic-design.jpg);
+    }
+
+    @include responsive(portatil)
+    {
+        width: 54.7em;
+    }
+
+   &__title
+   {
+       transform: translateY(12em);
+       color: $dark-desaturated-cyan;
+       text-transform: capitalize;
+       font-weight: map-get($weights, blackk);
+   }
+
+   &__text
+   {
+       transform: translateY(20em);
+       color: $dark-desaturated-cyan;
+       font-family: $font-primary;
+       line-height: 1.5;
+       font-size: 16px;
+       padding: 0 .7em;
+
+       @include responsive(portatil)
+       {
+           padding: 0 4em;
+       }
+   }
+}
+
+.photography
+{
+    background-image: url(/images/mobile/image-photography.jpg);
+    @include background;
+    height: 90vh;
+    text-align: center;
+    @include flex;
+
+    @include responsive(tablet)
+    {
+        background-image: url(/images/desktop/image-photography.jpg);
+    }
+
+    &__title
+   {
+       transform: translateY(11em);
+       color: $dark-desaturated-cyan;
+       text-transform: capitalize;
+       font-weight: map-get($weights, blackk);
+
+       @include responsive(portatil)
+       {
+           transform: translateY(12em);
+       }
+   }
+
+   &__text
+   {
+       transform: translateY(17em);
+       color: $dark-desaturated-cyan;
+       font-family: $font-primary;
+       line-height: 1.5;
+       font-size: 16px;
+       padding: 0 .7em;
+
+       @include responsive(portatil)
+       {
+           transform: translateY(19em);
+           padding: 0 7em;
+       }
+   }
+}
+
+.clients
+{
+    @include flex;
+    text-align: center;
+    padding: 1.2em;
+
+    @include responsive(portatil)
+    {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 4em;
+    }
+
+    &__title
+    {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: $grayish-blue;
+    }
+}
+
+.testimonials
+{
+    @include responsive(portatil)
+    {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+    }
+}
+
+.client
+{
+    margin: 1em 0 3em 0;
+
+    &__image
+    {
+        width: 60px;
+        border-radius: 50%;
+    }
+
+    &__text
+    {
+        font-family: $font-primary;
+        color: $very-dark-grayish-blue;
+        line-height: 1.5;
+
+        @include responsive(portatil)
+        {
+            font-size: 16px;
+        }
+    }
+
+    &__name-job
+    {
+        transform: translateY(.7em);
+        line-height: .3;
+    }
+
+    &__name
+    {
+        color: $very-dark-desaturated-blue;
+        font-weight: map-get($weights, blackk);
+
+        @include responsive (portatil)
+        {
+            font-size: 16px;
+        }
+    }
+
+    &__job
+    {
+        color: $grayish-blue;
+        font-family: $font-primary;
+
+        @include responsive(portatil)
+        {
+            font-size: 12px;
+        }
+    }
+}
+
+.gallery
+{
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include responsive(portatil)
+    {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    &__img
+    {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.contact
+{
+    @include flex;
+    justify-content: center;
+    background-color: #a0decf;
+    text-align: center;
+    height: 50vh;
+
+    @include responsive(movil-S)
+    {
+        height: 65vh;
+    }
+
+    &__logo
+    {
+        width: 8em;
+        filter: invert(70%) sepia(37%) saturate(467%) hue-rotate(118deg) brightness(90%) contrast(90%);
+
+        @include responsive(portatil)
+        {
+            margin-top: 2em;
+        }
+    }
+
+    &__services
+    {
+        list-style: none;
+        margin: 2em 0 4em 0;
+    }
+
+    &__item
+    {
+        display: inline-block;
+        text-decoration: none;
+        color: rgba($color: $dark-desaturated-cyan, $alpha: .7);
+        font-family: $font-primary;
+        margin: 1em;
+
+        &:hover
+        {
+            color: $white;
+        }
+    }
+
+    &__social
+    {
+        list-style: none;
+
+        img
+        {
+            margin: .5em;
+
+            &:hover
+            {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
